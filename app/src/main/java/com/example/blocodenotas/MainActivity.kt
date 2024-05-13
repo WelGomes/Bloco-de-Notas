@@ -59,7 +59,7 @@ fun BlocoDeNotas() {
     
     val storeAnotacao = StoreAnotacao(context)
 
-    val anotacaoSalva = storeAnotacao.getAnotacao.collectAsState(initial = "")
+    val anotacaoSalva = storeAnotacao.getAnotacao().collectAsState(initial = "")
     
     var anotacao by remember { mutableStateOf("") }
 
@@ -82,7 +82,7 @@ fun BlocoDeNotas() {
             FloatingActionButton(
                 onClick = {
                     scope.launch { 
-                        storeAnotacao.salvarAnotacao(anotacao)
+                        storeAnotacao.setAnotacao(anotacao)
                         Toast.makeText(context, "Anotação salva com sucesso!", Toast.LENGTH_SHORT).show()
                     }
                 },
