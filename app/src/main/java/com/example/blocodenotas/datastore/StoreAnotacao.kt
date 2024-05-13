@@ -16,12 +16,14 @@ class StoreAnotacao(private val context: Context) {
         val ANOTACAO_KEY = stringPreferencesKey("anotacao")
     }
 
-    val getAnotacao: Flow<String> = context.dataStore.data
-        .map {preferences ->
+    fun getAnotacao() : Flow<String> {
+        return context.dataStore.data
+        .map { preferences ->
             preferences[ANOTACAO_KEY] ?: ""
         }
+    }
 
-    suspend fun salvarAnotacao(anotacao: String) {
+    suspend fun setAnotacao(anotacao: String) {
         context.dataStore.edit {preferences ->
             preferences[ANOTACAO_KEY] = anotacao
         }
